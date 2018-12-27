@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<components>
+	<component name="" class="">
+		<source geometry="" />
+		<layers>
+			<layer>
+				<waypoints>
+				</waypoints>
+				<lights>
+				</lights>
+			</layer>
+		</layers>
+		<connections>
+		</connections>
+	</component>
+</components>

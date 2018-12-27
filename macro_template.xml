@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<macros>
+  <macro name="" class="">
+    <component ref="" />
+    <properties>
+      <identification name="" basename="" description="" variation="" shortvariation="" icon="" />
+      <software>
+      </software>
+      <explosiondamage value="" />
+      <storage missile="" unit="" />
+      <hull max="" />
+      <secrecy level="" />
+      <purpose primary="" />
+      <people capacity="" />
+      <physics mass="">
+        <inertia pitch="" yaw="" roll="" />
+        <drag forward="" reverse="" horizontal="" vertical="" pitch="" yaw="" roll="" />
+      </physics>
+      <thruster tags="" />
+      <ship type="" />
+    </properties>
+    <connections>
+    </connections>
+  </macro>
+</macros>
