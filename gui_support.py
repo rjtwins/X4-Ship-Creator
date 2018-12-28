@@ -6,6 +6,7 @@
 #    Dec 26, 2018 01:32:52 PM CET  platform: Windows NT
 #    Dec 28, 2018 02:38:11 AM CET  platform: Windows NT
 #    Dec 28, 2018 02:46:33 AM CET  platform: Windows NT
+#    Dec 28, 2018 05:00:57 PM CET  platform: Windows NT
 
 import sys
 import Main
@@ -97,6 +98,9 @@ def set_Tk_var():
     global ware_faction_var
     ware_faction_var = StringVar()
 
+    global ware_comp_list_var
+    ware_comp_list_var = StringVar()
+
     global model
     model = Main.Main()
 
@@ -136,23 +140,40 @@ def set_Tk_var():
     "ware_price_average_var" : ware_price_average_var,
     "ware_production_time_var" : ware_production_time_var,
     "ware_licence_var" : ware_licence_var,
-    "ware_faction_var" : ware_faction_var
+    "ware_faction_var" : ware_faction_var,
+    "ware_comp_list_var": ware_comp_list_var
     }
-    global list_var_1
-    list_var_1 = StringVar()
+
+
+
+def xxx(p1):
+    print('gui_support.xxx')
+    print('p1 = {0}'.format(p1))
+    sys.stdout.flush()
 
 def mirror():
     pass
 
 def add_ware():
-    global top_level
-    ware = simpledialog.askstring("Ware Name", 'Input <ware name>, <ware amount>',parent=top_level)
-    ware = ware.replace(" ", "").split(',')
-    name = ware[0]
-    amount = ware[1]
+    global top_level, ware_comp_list_var
+    try:
+        ware = simpledialog.askstring("Ware Name", 'Input <ware name> <ware amount>',parent=top_level)
+        ware = ware.split(' ')
+        name = ware[0]
+        amount = ware[1]
+        ware_list = list(eval(ware_comp_list_var.get()))
+        ware_list.append(ware)
+        ware_comp_list_var.set(ware_list)
+    except:
+        messagebox.showerror("Ware Error","That is not a valid ware string.")
 
 def remove_ware():
-    pass
+    global top_level, w
+    active = w.Scrolledlistbox1.curselection()
+    try:
+        w.Scrolledlistbox1.delete(active)
+    except TclError:
+        pass
 
 def clear_input_fields():
     for k in string_vars_dict:
@@ -290,6 +311,9 @@ def destroy_window():
 if __name__ == '__main__':
     import gui
     gui.vp_start_gui()
+
+
+
 
 
 

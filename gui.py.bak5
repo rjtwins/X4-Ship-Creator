@@ -65,7 +65,7 @@ class X4_Ship_Creator:
         self.style.map('.',background=
             [('selected', _compcolor), ('active',_ana2color)])
 
-        top.geometry("600x800")
+        top.geometry("800x800")
         top.title("X4-Ship-Creator")
         top.configure(background="#d9d9d9")
         top.configure(highlightbackground="#d9d9d9")

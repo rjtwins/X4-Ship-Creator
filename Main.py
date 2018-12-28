@@ -212,6 +212,10 @@ class Main:
 		owner = var_dict["ware_faction_var"].get()
 		self.ware.set_owner(owner)
 
+		for wares in list(eval(var_dict["ware_comp_list_var"].get())):
+			name = ware.split()
+			self.ware.add_production_comp(ware.split)
+
 	def output(self, folder, mirror):
 		#TODO break this up into defs
 		#Make sure to update the xml before calling this! DONE!

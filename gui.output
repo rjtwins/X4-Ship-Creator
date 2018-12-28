@@ -1,4 +1,18 @@
-  File "C:/gitRepos/X4-Ship-Creator/gui.py", line 1229
-    self.import = Menu(top,tearoff=0)
-              ^
-SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "C:/gitRepos/X4-Ship-Creator/gui.py", line 1369, in <module>
+    vp_start_gui()
+  File "C:/gitRepos/X4-Ship-Creator/gui.py", line 28, in vp_start_gui
+    gui_support.set_Tk_var()
+  File "C:\gitRepos\X4-Ship-Creator\gui_support.py", line 105, in set_Tk_var
+    model = Main.Main()
+  File "C:\gitRepos\X4-Ship-Creator\Main.py", line 18, in __init__
+    self.component = xml_classes.ship_component()
+  File "C:\gitRepos\X4-Ship-Creator\xml_classes.py", line 166, in __init__
+    self.components = read_xml(file)
+  File "C:\gitRepos\X4-Ship-Creator\xml_classes.py", line 11, in read_xml
+    tree = ET.parse(file)
+  File "C:\Python37-32\lib\xml\etree\ElementTree.py", line 1197, in parse
+    tree.parse(source, parser)
+  File "C:\Python37-32\lib\xml\etree\ElementTree.py", line 587, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: 'component_template.xml'

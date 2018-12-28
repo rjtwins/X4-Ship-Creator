@@ -1,0 +1,109 @@
+PAGE
+    Toplevel: X4-Ship-Creator
+        TNotebook: TNotebook1  locked
+            Frame: TNotebook1_t0   bind: <Control-Key-s> to {lambda e: xxx(e)}
+                Button: Button1   command: openx3d
+                Button: Button1   command: openDAE
+                Button: Button1   command: save
+                Entry: Entry2  
+                Entry: Entry2  
+                 command: mirror
+            Frame: TNotebook1_t1  
+                Frame: internals_label_1_frame  locked
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label4  
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                
+                    Entry: e19  
+                    Entry: e20  
+                    Entry: e21  
+                    Entry: e22  
+                    Entry: e23  
+                    Entry: e24  
+                    Entry: e25  
+                Frame: internals_labels_frame_2  locked
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label4  
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label3  
+                
+                    Entry: e26  
+                    Entry: e27  
+                    Entry: e28  
+                    Entry: e29  
+                    Entry: e30  
+                    Entry: e31  
+                    Entry: e32  
+                    Entry: e33  
+                    Entry: e34  
+                    Entry: e35  
+                    Entry: e36  
+                Label: Label1  
+                Frame: name_class_frame  locked
+                    Entry: e1  
+                    Entry: e2  
+                    Entry: e3  
+                    Entry: e4  
+                Frame: name_class_label_frame  locked
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label4  
+                Label: Label1  locked
+                Frame: text_ref_lable_frame  locked
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label4  
+                    Label: Label1  
+                    Label: Label2  
+                
+                    Entry: e5  
+                    Entry: e6  
+                    Entry: e7  
+                    Entry: e8  
+                    Entry: e9  
+                    Entry: e10  
+                Label: Label1  
+                Frame: ware_label_frame  
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                    Label: Label4  
+                    Label: Label1  
+                    Label: Label2  
+                    Label: Label3  
+                
+                    Entry: e12  
+                    Entry: e13  
+                    Entry: e14  
+                    Entry: e15  
+                    Entry: e16  
+                    Entry: e17  
+                    Entry: e17  
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_n configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_n configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y n} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y n}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_s configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_s configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y s} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y s}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_e configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_e configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y e} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y e}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_w configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_w configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y w} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y w}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_nw configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_nw configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y nw} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y nw}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_ne configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_ne configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y ne} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y ne}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_sw configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_sw configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y sw} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y sw}
+                     bind: <Leave> to {.top39.tNo58.t1.fra48.vTH_se configure -bg black} bind: <Enter> to {.top39.tNo58.t1.fra48.vTH_se configure -bg red} bind: <ButtonRelease-1> to {vTcl:grab_release %W} bind: <Button-1> to {vTcl:grab %W %X %Y} bind: <B1-Motion> to {vTcl:grab_resize %X %Y se} bind: <Control-B1-Motion> to {vTcl:grab_resize_ctrl %X %Y se}
+                Label: Label1  
+                Scrolledlistbox: Scrolledlistbox1  locked
+                    Listbox
+                Button: Button2   command: add_ware
+                Button: Button2   command: remove_ware
+        Menu Bar
+
