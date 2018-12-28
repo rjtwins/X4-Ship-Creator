@@ -289,17 +289,3 @@ class Main:
 			f.write(self.ware.to_xml_diff_string())
 
 		return materials
-
-
-
-#Get textures in from root
-#Extract model as DAE with UV textures
-
-
-#Generate file structure
-	#Place textures in proper locations.
-	#ANI file (From template ?)
-	#Run converter
-
-#Place hardpoints in editor
-#extract as x3d and run converter to get hardpoint locations

@@ -1,0 +1,4 @@
+  File "C:/gitRepos/X4-Ship-Creator/gui.py", line 1229
+    self.import = Menu(top,tearoff=0)
+              ^
+SyntaxError: invalid syntax

@@ -5,7 +5,6 @@
 # In conjunction with Tcl version 8.6
 #    Dec 26, 2018 01:32:52 PM CET  platform: Windows NT
 #    Dec 28, 2018 02:38:11 AM CET  platform: Windows NT
-#    Dec 28, 2018 02:46:33 AM CET  platform: Windows NT
 
 import sys
 import Main
@@ -138,8 +137,15 @@ def set_Tk_var():
     "ware_licence_var" : ware_licence_var,
     "ware_faction_var" : ware_faction_var
     }
-    global list_var_1
-    list_var_1 = StringVar()
+    global test123
+    test123 = StringVar()
+
+
+
+def xxx(p1):
+    print('gui_support.xxx')
+    print('p1 = {0}'.format(p1))
+    sys.stdout.flush()
 
 def mirror():
     pass
@@ -290,8 +296,5 @@ def destroy_window():
 if __name__ == '__main__':
     import gui
     gui.vp_start_gui()
-
-
-
 
 
