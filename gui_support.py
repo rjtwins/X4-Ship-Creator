@@ -23,6 +23,9 @@ except ImportError:
 
 
 def set_Tk_var():
+    global ERROR_LOG
+    ERROR_LOG = ""
+
     global mirror_var
     mirror_var = StringVar()
     mirror_var.set("0")
@@ -87,6 +90,23 @@ def set_Tk_var():
     global icon_ref_var
     icon_ref_var = StringVar()
 
+    #wares
+    global ware_group_var
+    ware_group_var = StringVar()
+    global ware_price_min_var
+    ware_price_min_var = StringVar()
+    global ware_price_max_var
+    ware_price_max_var = StringVar()
+    global ware_price_average_var
+    ware_price_average_var = StringVar()
+    global ware_production_time_var
+    ware_production_time_var = StringVar()
+    global ware_licence_var
+    ware_licence_var = StringVar()
+    global ware_faction_var
+    ware_faction_var = StringVar()
+
+
     global model
     model = Main.Main()
 
@@ -119,7 +139,14 @@ def set_Tk_var():
     "desc_ref_var" : desc_ref_var,
     "variant_ref_var" : variant_ref_var,
     "short_variant_ref_var" : short_variant_ref_var,
-    "icon_ref_var" : icon_ref_var
+    "icon_ref_var" : icon_ref_var,
+    "ware_group_var" : ware_group_var,
+    "ware_price_min_var" : ware_price_min_var,
+    "ware_price_max_var" : ware_price_max_var,
+    "ware_price_average_var" : ware_price_average_var,
+    "ware_production_time_var" : ware_production_time_var,
+    "ware_licence_var" : ware_licence_var,
+    "ware_faction_var" : ware_faction_var
     }
 
 def mirror():
@@ -143,29 +170,44 @@ def export_macro():
     f = filedialog.asksaveasfilename(defaultextension=".xml", filetypes = (("Macro XML","*.xml"),("all files","*.*")))
     if f is None or f == "":
         return
-    model.update_xml()
-    model.export_macro(file)
+    update_model()
+    model.export_macro(f)
 
-def export_component():
+def export_comp():
     f = filedialog.asksaveasfilename(defaultextension=".xml", filetypes = (("Component XML","*.xml"),("all files","*.*")))
     if f is None or f == "":
         return
-    model.update_xml()
-    model.export_component(file)
+    update_model()
+    model.export_component(f)
+
+def export_ware():
+    f = filedialog.asksaveasfilename(defaultextension=".xml", filetypes = (("Ware XML","*.xml"),("all files","*.*")))
+    if f is None or f == "":
+        return
+    update_model()
+    model.export_ware(f)
 
 def import_comp():
     f = filedialog.askopenfilename(filetypes = (("XML Ship Component files","*.xml"),("all files","*.*")))
     if f is None or f == "":
         return
-    model.import_component(f)
+    try:
+        model.import_component(f)
+    except AttributeError:
+        messagebox.showerror("Load Error","The component file you are trying to import does not have the proper component xml structure.")
     update_window()
+    update_model()
 
 def import_macro():
     f = filedialog.askopenfilename(filetypes = (("XML Ship Macro files","*.xml"),("all files","*.*")))
     if f is None or f == "":
         return
-    model.import_macro(f)
+    try:
+        model.import_macro(f)
+    except AttributeError:
+        messagebox.showerror("Load Error","The macro file you are trying to import does not have the proper macro xml structure.")
     update_window()
+    update_model()
 
 def openDAE():
     f = filedialog.askopenfilename(filetypes = (("DAE files","*.dae"),("all files","*.*")))
@@ -173,6 +215,7 @@ def openDAE():
         return
     model.import_mesh(f)
     update_window()
+    update_model()
 
 def openx3d():
     f = filedialog.askopenfilename(filetypes = (("X3D files","*.x3d"),("all files","*.*")))
@@ -180,6 +223,7 @@ def openx3d():
         return
     model.import_x3d(f)
     update_window()
+    update_model()
 
 def open_instance():
     f = filedialog.askopenfilename(filetypes = (("Ship Creater Project","*.scp"),("all files","*.*")))
@@ -187,17 +231,7 @@ def open_instance():
         return
     model.import_project(f)
     update_window()
-
-#Start not save!
-def save():
-    model.update_xml(string_vars_dict)
-
-    #SELECT OTUPUT FOLDER!
-    folder = filedialog.askdirectory()
-    if folder is None or folder == "":
-        return
-    model.output(folder, mirror_var)
-
+    update_model()
 
 def save_as_instance():
     model.update_xml(string_vars_dict)
@@ -207,7 +241,7 @@ def save_as_instance():
     model.set_project_file(f)
     model.save_project()
 
-def save_instance(event):
+def save_instance(event=None):
     if model.get_project_file() != "":
         model.update_xml(string_vars_dict)
         model.save_project()
@@ -222,6 +256,22 @@ def update_window():
 
 def update_model():
     model.update_xml(string_vars_dict)
+
+#Start not save!
+def save():
+    model.update_xml(string_vars_dict)
+
+    #SELECT OTUPUT FOLDER!
+    folder = filedialog.askdirectory()
+    if folder is None or folder == "":
+        return
+    materials = model.output(folder, mirror_var)
+
+    #Display materials
+    mat_string = "\n"
+    for material in materials:
+        mat_string = mat_string + material + '\n'
+    messagebox.showwarning("Materials Warning","Make sure you have the following materials defined in libraries/material_library.xml" + mat_string)
 
 def init(top, gui, *args, **kwargs):
     global w, top_level, root

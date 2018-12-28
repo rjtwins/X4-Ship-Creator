@@ -21,7 +21,6 @@ def get_dss_path(dae_file):
 		ddss.append(dds)
 	return ddss
 
-
 def gen_index_macros(path):
 	diff = ET.Element("diff")
 	add = ET.Element('add', sel='/index')
@@ -49,6 +48,90 @@ def to_xml_string(xml):
 
 
 # class ware_xml()
+class Ware():
+	root = ""
+	ware = ""
+	def __init__(self, file="ware_template.xml"):
+		self.ware = read_xml(file)
+		self.price = self.ware.find(".//price")
+		self.production = self.ware.find(".//production")
+		self.primary = self.production.find(".//primary")
+		self.component = self.ware.find(".//component")
+		self.restriction = self.ware.find(".//restriction")
+		self.owner = self.ware.find(".//owner")
+		self.root = self.ware
+
+	def set_ware(self, id, name_ref, description_ref, group):
+		self.ware.set('id', id)
+		self.ware.set('name', name_ref)
+		self.ware.set('description', description_ref)
+		self.ware.set('group', group)
+		self.production.set('name', name_ref)
+
+	def set_price(self, min, average, max):
+		self.price.set('min', min)
+		self.price.set('average', average)
+		self.price.set('max', max)
+		
+
+	def set_production(self, time):
+		self.production.set('time', time)
+
+	def add_production_comp(self, ware, amount):
+		self.primary.append(ET.Element('ware', ware=ware, amount=amount))
+
+	def set_component(self, ref):
+		self.component.set('ref', ref)
+
+	def set_restriction(self, license):
+		self.restriction.set('licence', license)
+
+	def set_owner(self, faction):
+		self.owner.set('faction', faction)
+
+	def get_ware(self):
+		return (
+			self.ware.get('id'),
+			self.ware.get('name'),
+			self.ware.get('description'),
+			self.ware.get('group')
+			)
+
+	def get_price(self):
+		return(
+			self.price.get('min'),
+			self.price.get('average'),
+			self.price.get('max')
+			)
+
+	def get_production(self):
+		return(self.production.get('time'))
+
+	def get_production_comps(self):
+		comps = []
+		for comp in self.primary:
+			comps.append([comp.get('ware'), comp.get('amount')])
+		return comps
+
+	def get_component(self):
+		return self.component.get('ref')
+
+	def get_restriction(self):
+		return self.restriction.get('licence')
+
+	def get_owner(self):
+		return self.owner.get('faction')
+
+	#Generate a add diff to encapsulate the ware
+	def to_xml_diff_string(self):
+		root = ET.Element("diff")
+		add = ET.Element('add', sel="/wares")
+		root.append(add)
+		add.append(self.ware)
+		return to_xml_string(root)
+
+	def to_xml_string(self):		
+		return to_xml_string(self.ware)
 
 class ship_xml:
 	root = ET.Element("root")

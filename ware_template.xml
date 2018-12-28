@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ware id="" name="" description="" group="" transport="ship" volume="1" tags="ship">
+  <price min="" average="" max="" />
+  <production time="" amount="1" method="default" name="">
+    <primary>
+    </primary>
+  </production>
+  <component ref="" amount="1" />
+  <restriction licence="" />
+  <owner faction="" />
+</ware>

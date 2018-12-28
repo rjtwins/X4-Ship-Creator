@@ -6,38 +6,6 @@ import x3d_parser
 import os
 import subprocess
 
-#For reference
-# ship_name = "ship_test"
-# ship_class = ""
-# ship_type = ""
-# ship_thruster = ""
-
-# ship_name_ref = ""
-# ship_base_name_ref = ""
-# ship_desc_ref = ""
-# ship_var_ref = ""
-# ship_short_var_ref = ""
-# ship_icon = ""
-
-# ship_xpldam = ""
-# ship_store_miss = ""
-# ship_store_drone = ""
-# ship_store_crew = ""
-# ship_hull = ""
-# ship_secrecy = ""
-# ship_purpose = ""
-
-# ship_inertia_yaw = ""
-# ship_inertia_pitch = ""
-# ship_inertia_roll = ""
-# ship_dragg_for = ""
-# ship_dragg_rev = ""
-# ship_dragg_vert = ""
-# ship_dragg_hor = ""
-# ship_dragg_pitch = ""
-# ship_dragg_yaw = ""
-# ship_dragg_roll = ""
-
 class Main:
 	project_file = ""
 	mesh_file = ""
@@ -49,6 +17,7 @@ class Main:
 	#Generate ship and component
 		self.component = xml_classes.ship_component()
 		self.macro = xml_classes.ship_macro()
+		self.ware = xml_classes.Ware()
 
 	def import_component(self,file):
 		self.component = xml_classes.ship_component(file)
@@ -98,6 +67,9 @@ class Main:
 		self.macro = xml_classes.ship_macro()
 		self.project_file = ""
 		self.mesh_file = ""
+		self.mesh_file_path = ""
+		self.x3d_file = ""
+		self.x3d_file_path = ""
 
 	def set_project_file(self, file):
 		self.project_file = file
@@ -105,7 +77,24 @@ class Main:
 	def get_project_file(self):
 		return self.project_file
 
+	def export_macro(self, file):
+		macro = self.macro.to_xml_string()
+		with open(file, 'w+') as f:
+			f.write(macro)
+
+	def export_component(self, file):
+		component = self.component.to_xml_string()
+		with open(file, 'w+') as f:
+			f.write(component)
+
+	def export_ware(self, file):
+		ware = self.ware.to_xml_string()
+		with open(file, 'w+') as f:
+			f.write(ware)
+
+	#Should probably use bindings to update when stuff gets typed
 	def update_vars(self, var_dict):
+		#Macro Vars
 		var_dict['engine_size_var'].set(self.macro.get_engine())
 		var_dict['expl_damage_var'].set(self.macro.get_expl_dam())
 		var_dict['missile_storage_var'].set(self.macro.get_storage_missile())
@@ -117,8 +106,8 @@ class Main:
 		var_dict['mass_var'].set(self.macro.get_mass())
 		yaw, pitch, roll = self.macro.get_inertia()
 		var_dict['inertia_yaw_var'].set(yaw)
-		var_dict['inertia_roll_var'].set(pitch)
-		var_dict['inertia_pitch_var'].set(roll)
+		var_dict['inertia_roll_var'].set(roll)
+		var_dict['inertia_pitch_var'].set(pitch)
 		forward, reverse, horizontal, vertical, pitch, yaw, roll = self.macro.get_drag()
 		var_dict['drag_forward_var'].set(forward)
 		var_dict['drag_reverse_var'].set(reverse)
@@ -136,6 +125,16 @@ class Main:
 		var_dict['variant_ref_var'].set(self.macro.get_variation_ref())
 		var_dict['short_variant_ref_var'].set(self.macro.get_short_variation_ref())
 		var_dict['icon_ref_var'].set(self.macro.get_icon_ref())
+		#Ware Vars
+		id, name, desc, group = self.ware.get_ware()
+		var_dict["ware_group_var"].set(group)
+		min, max, everage = self.ware.get_price()
+		var_dict["ware_price_min_var"].set(min)
+		var_dict["ware_price_max_var"].set(max)
+		var_dict["ware_price_average_var"].set(everage)
+		var_dict["ware_production_time_var"].set(self.ware.get_production())
+		var_dict["ware_licence_var"].set(self.ware.get_restriction())
+		var_dict["ware_faction_var"].set(self.ware.get_owner())
 
 	def update_xml(self, var_dict):
 		##Macro
@@ -192,6 +191,27 @@ class Main:
 		type = var_dict['type_var'].get()
 		self.macro.set_type(type)
 
+		#ware vars
+		id = self.macro.get_name()
+		name = self.macro.get_name_ref()
+		desc = self.macro.get_desc_ref()
+		group = var_dict['ware_group_var'].get()
+		self.ware.set_ware(id, name, desc, group)
+
+		min = var_dict["ware_price_min_var"].get()
+		max = var_dict["ware_price_max_var"].get()
+		average = var_dict["ware_price_average_var"].get()
+		self.ware.set_price(min, average, max)
+
+		time = var_dict["ware_production_time_var"].get()
+		self.ware.set_production(time)
+
+		licence = var_dict["ware_licence_var"].get()
+		self.ware.set_restriction(licence)
+
+		owner = var_dict["ware_faction_var"].get()
+		self.ware.set_owner(owner)
+
 	def output(self, folder, mirror):
 		#TODO break this up into defs
 		#Make sure to update the xml before calling this! DONE!
@@ -206,7 +226,6 @@ class Main:
 		'/assets/units',
 		'/assets/units/%s' % (ship_class),
 		'/assets/units/%s/macros' % (ship_class),
-		'/assets/textures',
 		'/index',
 		'/libraries'
 		]
@@ -264,9 +283,10 @@ class Main:
 		index_components = xml_classes.gen_index_components('/assets/units/%s/%s.xml' % (ship_class, ship_name))
 		with open(file, 'w+') as f:
 			f.write(xml_classes.to_xml_string(index_macros))
-		
 
-
+		file = folder + '/libraries/wares.xml'
+		with open(file, 'w+') as f:
+			f.write(self.ware.to_xml_diff_string())
 
 		return materials
 

@@ -1254,6 +1254,213 @@ class X4_Ship_Creator:
         self.Entry6.configure(selectbackground="#c4c4c4")
         self.Entry6.configure(selectforeground="black")
 
+        self.Frame1 = Frame(self.TNotebook1_t1)
+        self.Frame1.place(relx=0.027, rely=0.488, relheight=0.244
+                , relwidth=0.183)
+        self.Frame1.configure(relief=GROOVE)
+        self.Frame1.configure(borderwidth="2")
+        self.Frame1.configure(relief=GROOVE)
+        self.Frame1.configure(background="#d9d9d9")
+        self.Frame1.configure(highlightbackground="#d9d9d9")
+        self.Frame1.configure(highlightcolor="black")
+        self.Frame1.configure(width=135)
+
+        self.Label1 = Label(self.Frame1)
+        self.Label1.place(relx=0.074, rely=0.044, height=26, width=47)
+        self.Label1.configure(activebackground="#f9f9f9")
+        self.Label1.configure(activeforeground="black")
+        self.Label1.configure(background="#d9d9d9")
+        self.Label1.configure(disabledforeground="#a3a3a3")
+        self.Label1.configure(foreground="#000000")
+        self.Label1.configure(highlightbackground="#d9d9d9")
+        self.Label1.configure(highlightcolor="black")
+        self.Label1.configure(text='''Group''')
+
+        self.Label2 = Label(self.Frame1)
+        self.Label2.place(relx=0.074, rely=0.178, height=26, width=67)
+        self.Label2.configure(activebackground="#f9f9f9")
+        self.Label2.configure(activeforeground="black")
+        self.Label2.configure(background="#d9d9d9")
+        self.Label2.configure(disabledforeground="#a3a3a3")
+        self.Label2.configure(foreground="#000000")
+        self.Label2.configure(highlightbackground="#d9d9d9")
+        self.Label2.configure(highlightcolor="black")
+        self.Label2.configure(text='''Price Min''')
+
+        self.Label3 = Label(self.Frame1)
+        self.Label3.place(relx=0.074, rely=0.311, height=26, width=70)
+        self.Label3.configure(activebackground="#f9f9f9")
+        self.Label3.configure(activeforeground="black")
+        self.Label3.configure(background="#d9d9d9")
+        self.Label3.configure(disabledforeground="#a3a3a3")
+        self.Label3.configure(foreground="#000000")
+        self.Label3.configure(highlightbackground="#d9d9d9")
+        self.Label3.configure(highlightcolor="black")
+        self.Label3.configure(text='''Price Max''')
+
+        self.Label4 = Label(self.Frame1)
+        self.Label4.place(relx=0.074, rely=0.444, height=26, width=97)
+        self.Label4.configure(activebackground="#f9f9f9")
+        self.Label4.configure(activeforeground="black")
+        self.Label4.configure(background="#d9d9d9")
+        self.Label4.configure(disabledforeground="#a3a3a3")
+        self.Label4.configure(foreground="#000000")
+        self.Label4.configure(highlightbackground="#d9d9d9")
+        self.Label4.configure(highlightcolor="black")
+        self.Label4.configure(text='''Price Average''')
+
+        self.Label1 = Label(self.Frame1)
+        self.Label1.place(relx=0.074, rely=0.578, height=26, width=115)
+        self.Label1.configure(activebackground="#f9f9f9")
+        self.Label1.configure(activeforeground="black")
+        self.Label1.configure(background="#d9d9d9")
+        self.Label1.configure(disabledforeground="#a3a3a3")
+        self.Label1.configure(foreground="#000000")
+        self.Label1.configure(highlightbackground="#d9d9d9")
+        self.Label1.configure(highlightcolor="black")
+        self.Label1.configure(text='''Production Time''')
+
+        self.Label2 = Label(self.Frame1)
+        self.Label2.place(relx=0.074, rely=0.711, height=26, width=112)
+        self.Label2.configure(activebackground="#f9f9f9")
+        self.Label2.configure(activeforeground="black")
+        self.Label2.configure(background="#d9d9d9")
+        self.Label2.configure(disabledforeground="#a3a3a3")
+        self.Label2.configure(foreground="#000000")
+        self.Label2.configure(highlightbackground="#d9d9d9")
+        self.Label2.configure(highlightcolor="black")
+        self.Label2.configure(text='''Licence Needed''')
+
+        self.Label3 = Label(self.Frame1)
+        self.Label3.place(relx=0.074, rely=0.844, height=26, width=54)
+        self.Label3.configure(activebackground="#f9f9f9")
+        self.Label3.configure(activeforeground="black")
+        self.Label3.configure(background="#d9d9d9")
+        self.Label3.configure(disabledforeground="#a3a3a3")
+        self.Label3.configure(foreground="#000000")
+        self.Label3.configure(highlightbackground="#d9d9d9")
+        self.Label3.configure(highlightcolor="black")
+        self.Label3.configure(text='''Faction''')
+
+        self.Frame1 = Frame(self.TNotebook1_t1)
+        self.Frame1.place(relx=0.217, rely=0.488, relheight=0.244
+                , relwidth=0.224)
+        self.Frame1.configure(relief=GROOVE)
+        self.Frame1.configure(borderwidth="2")
+        self.Frame1.configure(relief=GROOVE)
+        self.Frame1.configure(background="#d9d9d9")
+        self.Frame1.configure(highlightbackground="#d9d9d9")
+        self.Frame1.configure(highlightcolor="black")
+        self.Frame1.configure(width=165)
+
+        self.Entry3 = Entry(self.Frame1)
+        self.Entry3.place(relx=0.061, rely=0.044,height=24, relwidth=0.873)
+        self.Entry3.configure(background="white")
+        self.Entry3.configure(disabledforeground="#a3a3a3")
+        self.Entry3.configure(font="TkFixedFont")
+        self.Entry3.configure(foreground="#000000")
+        self.Entry3.configure(highlightbackground="#d9d9d9")
+        self.Entry3.configure(highlightcolor="black")
+        self.Entry3.configure(insertbackground="black")
+        self.Entry3.configure(selectbackground="#c4c4c4")
+        self.Entry3.configure(selectforeground="black")
+        self.Entry3.configure(textvariable=gui_support.ware_group_var)
+        self.Entry3.configure(width=144)
+
+        self.Entry4 = Entry(self.Frame1)
+        self.Entry4.place(relx=0.061, rely=0.178,height=24, relwidth=0.873)
+        self.Entry4.configure(background="white")
+        self.Entry4.configure(disabledforeground="#a3a3a3")
+        self.Entry4.configure(font="TkFixedFont")
+        self.Entry4.configure(foreground="#000000")
+        self.Entry4.configure(highlightbackground="#d9d9d9")
+        self.Entry4.configure(highlightcolor="black")
+        self.Entry4.configure(insertbackground="black")
+        self.Entry4.configure(selectbackground="#c4c4c4")
+        self.Entry4.configure(selectforeground="black")
+        self.Entry4.configure(textvariable=gui_support.ware_price_min_var)
+        self.Entry4.configure(width=144)
+
+        self.Entry5 = Entry(self.Frame1)
+        self.Entry5.place(relx=0.061, rely=0.311,height=24, relwidth=0.873)
+        self.Entry5.configure(background="white")
+        self.Entry5.configure(disabledforeground="#a3a3a3")
+        self.Entry5.configure(font="TkFixedFont")
+        self.Entry5.configure(foreground="#000000")
+        self.Entry5.configure(highlightbackground="#d9d9d9")
+        self.Entry5.configure(highlightcolor="black")
+        self.Entry5.configure(insertbackground="black")
+        self.Entry5.configure(selectbackground="#c4c4c4")
+        self.Entry5.configure(selectforeground="black")
+        self.Entry5.configure(textvariable=gui_support.ware_price_max_var)
+        self.Entry5.configure(width=144)
+
+        self.Entry6 = Entry(self.Frame1)
+        self.Entry6.place(relx=0.061, rely=0.444,height=24, relwidth=0.873)
+        self.Entry6.configure(background="white")
+        self.Entry6.configure(disabledforeground="#a3a3a3")
+        self.Entry6.configure(font="TkFixedFont")
+        self.Entry6.configure(foreground="#000000")
+        self.Entry6.configure(highlightbackground="#d9d9d9")
+        self.Entry6.configure(highlightcolor="black")
+        self.Entry6.configure(insertbackground="black")
+        self.Entry6.configure(selectbackground="#c4c4c4")
+        self.Entry6.configure(selectforeground="black")
+        self.Entry6.configure(textvariable=gui_support.ware_price_average_var)
+        self.Entry6.configure(width=144)
+
+        self.Entry6 = Entry(self.Frame1)
+        self.Entry6.place(relx=0.061, rely=0.578,height=24, relwidth=0.873)
+        self.Entry6.configure(background="white")
+        self.Entry6.configure(disabledforeground="#a3a3a3")
+        self.Entry6.configure(font="TkFixedFont")
+        self.Entry6.configure(foreground="#000000")
+        self.Entry6.configure(highlightbackground="#d9d9d9")
+        self.Entry6.configure(highlightcolor="black")
+        self.Entry6.configure(insertbackground="black")
+        self.Entry6.configure(selectbackground="#c4c4c4")
+        self.Entry6.configure(selectforeground="black")
+        self.Entry6.configure(textvariable=gui_support.ware_production_time_var)
+        self.Entry6.configure(width=144)
+
+        self.Entry6 = Entry(self.Frame1)
+        self.Entry6.place(relx=0.061, rely=0.711,height=24, relwidth=0.873)
+        self.Entry6.configure(background="white")
+        self.Entry6.configure(disabledforeground="#a3a3a3")
+        self.Entry6.configure(font="TkFixedFont")
+        self.Entry6.configure(foreground="#000000")
+        self.Entry6.configure(highlightbackground="#d9d9d9")
+        self.Entry6.configure(highlightcolor="black")
+        self.Entry6.configure(insertbackground="black")
+        self.Entry6.configure(selectbackground="#c4c4c4")
+        self.Entry6.configure(selectforeground="black")
+        self.Entry6.configure(textvariable=gui_support.ware_licence_var)
+        self.Entry6.configure(width=144)
+
+        self.Entry6 = Entry(self.Frame1)
+        self.Entry6.place(relx=0.061, rely=0.844,height=24, relwidth=0.873)
+        self.Entry6.configure(background="white")
+        self.Entry6.configure(disabledforeground="#a3a3a3")
+        self.Entry6.configure(font="TkFixedFont")
+        self.Entry6.configure(foreground="#000000")
+        self.Entry6.configure(highlightbackground="#d9d9d9")
+        self.Entry6.configure(highlightcolor="black")
+        self.Entry6.configure(insertbackground="black")
+        self.Entry6.configure(selectbackground="#c4c4c4")
+        self.Entry6.configure(selectforeground="black")
+        self.Entry6.configure(textvariable=gui_support.ware_faction_var)
+
+        self.Label1 = Label(self.TNotebook1_t1)
+        self.Label1.place(relx=0.041, rely=0.455, height=26, width=276)
+        self.Label1.configure(activebackground="#f9f9f9")
+        self.Label1.configure(activeforeground="black")
+        self.Label1.configure(background="#d9d9d9")
+        self.Label1.configure(disabledforeground="#a3a3a3")
+        self.Label1.configure(foreground="#000000")
+        self.Label1.configure(highlightbackground="#d9d9d9")
+        self.Label1.configure(highlightcolor="black")
+        self.Label1.configure(text='''Ware Settings''')
+
         self.menubar = Menu(top,font="TkMenuFont",bg=_bgcolor,fg=_fgcolor)
         top.configure(menu = self.menubar)
 
@@ -1310,7 +1517,6 @@ class X4_Ship_Creator:
                 activebackground="#d9d9d9",
                 activeforeground="#000000",
                 background="#d9d9d9",
-                compound="left",
                 font="TkMenuFont",
                 foreground="#000000",
                 label="Import")
@@ -1319,7 +1525,6 @@ class X4_Ship_Creator:
                 activeforeground="#000000",
                 background="#d9d9d9",
                 command=gui_support.import_macro,
-                compound="left",
                 font="TkMenuFont",
                 foreground="#000000",
                 label="macro",
@@ -1329,16 +1534,15 @@ class X4_Ship_Creator:
                 activeforeground="#000000",
                 background="#d9d9d9",
                 command=gui_support.import_comp,
-                compound="left",
                 font="TkMenuFont",
                 foreground="#000000",
                 label="component")
+        
         self.export = Menu(top,tearoff=0)
         self.menubar.add_cascade(menu=self.export,
                 activebackground="#d9d9d9",
                 activeforeground="#000000",
                 background="#d9d9d9",
-                compound="left",
                 font="TkMenuFont",
                 foreground="#000000",
                 label="Export")
@@ -1347,7 +1551,6 @@ class X4_Ship_Creator:
                 activeforeground="#000000",
                 background="#d9d9d9",
                 command=gui_support.export_macro,
-                compound="left",
                 font="TkMenuFont",
                 foreground="#000000",
                 label="macro")
@@ -1355,11 +1558,19 @@ class X4_Ship_Creator:
                 activebackground="#c9c9c9",
                 activeforeground="#000000",
                 background="#d9d9d9",
-                command=gui_support.export_component,
-                compound="left",
+                command=gui_support.export_comp,
                 font="TkMenuFont",
                 foreground="#000000",
                 label="component")
+        self.export.add_command(
+                activebackground="#d8d8d8",
+                activeforeground="#000000",
+                background="#d9d9d9",
+                command=gui_support.export_ware,
+                compound="left",
+                font="TkMenuFont",
+                foreground="#000000",
+                label="ware")
 
 
 if __name__ == '__main__':
