@@ -80,6 +80,10 @@ class Ware():
 	def add_production_comp(self, ware, amount):
 		self.primary.append(ET.Element('ware', ware=ware, amount=amount))
 
+	def clear_production_comp(self):
+		for child in self.primary:
+			self.primary.remove(child)
+
 	def set_component(self, ref):
 		self.component.set('ref', ref)
 

@@ -47,11 +47,13 @@ class Main:
 		self.mesh_file = project['mesh_file']
 		self.x3d_file_path = project['x3d_file_path']
 		self.mesh_file_path = project['mesh_file_path']
+		self.ware = project['ware']
 
 	def save_project(self):
 		project = {
 		"component":self.component,
 		"macro":self.macro,
+		"ware" : self.ware,
 		"mesh_file":self.mesh_file,
 		"x3d_file":self.x3d_file,
 		"mesh_file_path":self.mesh_file_path,
@@ -65,6 +67,7 @@ class Main:
 	def clear_project(self):
 		self.component = xml_classes.ship_component()
 		self.macro = xml_classes.ship_macro()
+		self.ware = xml_classes.Ware()
 		self.project_file = ""
 		self.mesh_file = ""
 		self.mesh_file_path = ""
@@ -135,6 +138,7 @@ class Main:
 		var_dict["ware_production_time_var"].set(self.ware.get_production())
 		var_dict["ware_licence_var"].set(self.ware.get_restriction())
 		var_dict["ware_faction_var"].set(self.ware.get_owner())
+		var_dict["ware_comp_list_var"].set(self.ware.get_production_comps())
 
 	def update_xml(self, var_dict):
 		##Macro
@@ -198,6 +202,8 @@ class Main:
 		group = var_dict['ware_group_var'].get()
 		self.ware.set_ware(id, name, desc, group)
 
+		self.ware.set_component('%s_macro' % (self.macro.get_name()))
+
 		min = var_dict["ware_price_min_var"].get()
 		max = var_dict["ware_price_max_var"].get()
 		average = var_dict["ware_price_average_var"].get()
@@ -212,9 +218,10 @@ class Main:
 		owner = var_dict["ware_faction_var"].get()
 		self.ware.set_owner(owner)
 
-		for wares in list(eval(var_dict["ware_comp_list_var"].get())):
-			name = ware.split()
-			self.ware.add_production_comp(ware.split)
+		self.ware.clear_production_comp()
+		if var_dict["ware_comp_list_var"].get() != "":
+			for item in list(eval(var_dict["ware_comp_list_var"].get())):
+				self.ware.add_production_comp(item[0], item[1])
 
 	def output(self, folder, mirror):
 		#TODO break this up into defs
@@ -286,7 +293,7 @@ class Main:
 		file = folder + '/index/components.xml'
 		index_components = xml_classes.gen_index_components('/assets/units/%s/%s.xml' % (ship_class, ship_name))
 		with open(file, 'w+') as f:
-			f.write(xml_classes.to_xml_string(index_macros))
+			f.write(xml_classes.to_xml_string(index_components))
 
 		file = folder + '/libraries/wares.xml'
 		with open(file, 'w+') as f:

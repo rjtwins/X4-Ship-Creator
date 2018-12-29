@@ -100,6 +100,7 @@ def set_Tk_var():
 
     global ware_comp_list_var
     ware_comp_list_var = StringVar()
+    ware_comp_list_var.set([])
 
     global model
     model = Main.Main()
@@ -144,13 +145,6 @@ def set_Tk_var():
     "ware_comp_list_var": ware_comp_list_var
     }
 
-
-
-def xxx(p1):
-    print('gui_support.xxx')
-    print('p1 = {0}'.format(p1))
-    sys.stdout.flush()
-
 def mirror():
     pass
 
@@ -161,7 +155,11 @@ def add_ware():
         ware = ware.split(' ')
         name = ware[0]
         amount = ware[1]
-        ware_list = list(eval(ware_comp_list_var.get()))
+        ware_list = ware_comp_list_var.get()
+        if ware_list == "" or ware_list == None:
+            ware_list = []
+        else:
+            ware_list = list(eval(ware_comp_list_var.get()))
         ware_list.append(ware)
         ware_comp_list_var.set(ware_list)
     except:
@@ -271,7 +269,6 @@ def save_instance(event=None):
     else:
         save_as_instance()
 
-#a nightmare saved for last
 def update_window():
     model.update_vars(string_vars_dict)
     dae_output.set(model.mesh_file_path)
@@ -292,7 +289,7 @@ def save():
 
     #Display materials
     mat_string = "\n"
-    for material in materials:
+    for material in sorted(set(materials)):
         mat_string = mat_string + material + '\n'
     messagebox.showwarning("Materials Warning","Make sure you have the following materials defined in libraries/material_library.xml" + mat_string)
 
