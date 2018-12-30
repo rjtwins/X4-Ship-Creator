@@ -286,12 +286,12 @@ class Main:
 
 		#Generate index patches
 		file = folder + '/index/macros.xml'
-		index_macros = xml_classes.gen_index_macros('/assets/units/%s/macros/%s_macro.xml' % (ship_class, ship_name))
+		index_macros = xml_classes.gen_index_macros('/assets/units/%s/macros/%s_macro' % (ship_class, ship_name))
 		with open(file, 'w+') as f:
 			f.write(xml_classes.to_xml_string(index_macros))
 		
 		file = folder + '/index/components.xml'
-		index_components = xml_classes.gen_index_components('/assets/units/%s/%s.xml' % (ship_class, ship_name))
+		index_components = xml_classes.gen_index_components('/assets/units/%s/%s' % (ship_class, ship_name))
 		with open(file, 'w+') as f:
 			f.write(xml_classes.to_xml_string(index_components))
 
