@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from xml.dom.minidom import parse, parseString
 import pickle
 from lxml import etree
+from datetime import datetime
 
 def from_binary(file):
 	return pickle.loads(file)
@@ -35,8 +36,10 @@ def gen_index_components(path):
 	diff.append(add)
 	return diff
 
-def generate_ware_xml():
-	pass
+def gen_content(name):
+	date = datetime.today().strftime('%Y-%m-%d')
+	content = ET.Element("content", id=name, description="", author="", version="1", date=date, save="0", enabled="1")
+	return content
 
 def to_xml_string(xml):
 	parser = etree.XMLParser(remove_blank_text=True)

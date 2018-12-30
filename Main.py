@@ -223,7 +223,7 @@ class Main:
 			for item in list(eval(var_dict["ware_comp_list_var"].get())):
 				self.ware.add_production_comp(item[0], item[1])
 
-	def output(self, folder, mirror):
+	def output(self, folder, mirror, index, content):
 		#TODO break this up into defs
 		#Make sure to update the xml before calling this! DONE!
 
@@ -284,19 +284,27 @@ class Main:
 			new_component = xml_classes.ship_component(file)
 			materials = new_component.get_materials()
 
-		#Generate index patches
-		file = folder + '/index/macros.xml'
-		index_macros = xml_classes.gen_index_macros('/assets/units/%s/macros/%s_macro' % (ship_class, ship_name))
-		with open(file, 'w+') as f:
-			f.write(xml_classes.to_xml_string(index_macros))
-		
-		file = folder + '/index/components.xml'
-		index_components = xml_classes.gen_index_components('/assets/units/%s/%s' % (ship_class, ship_name))
-		with open(file, 'w+') as f:
-			f.write(xml_classes.to_xml_string(index_components))
+		#Generate index patches?
+		if index:
+			file = folder + '/index/macros.xml'
+			index_macros = xml_classes.gen_index_macros('/assets/units/%s/macros/%s_macro' % (ship_class, ship_name))
+			with open(file, 'w+') as f:
+				f.write(xml_classes.to_xml_string(index_macros))
+			
+			file = folder + '/index/components.xml'
+			index_components = xml_classes.gen_index_components('/assets/units/%s/%s' % (ship_class, ship_name))
+			with open(file, 'w+') as f:
+				f.write(xml_classes.to_xml_string(index_components))
 
-		file = folder + '/libraries/wares.xml'
-		with open(file, 'w+') as f:
-			f.write(self.ware.to_xml_diff_string())
+			file = folder + '/libraries/wares.xml'
+			with open(file, 'w+') as f:
+				f.write(self.ware.to_xml_diff_string())
+
+		#Generate content?
+		if content:
+			file = folder + '/content.xml'
+			content = xml_classes.gen_content(ship_name)
+			with open(file, 'w+') as f:
+				f.write(xml_classes.to_xml_string(content))
 
 		return materials

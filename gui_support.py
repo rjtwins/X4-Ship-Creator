@@ -278,6 +278,7 @@ def update_model():
     model.update_xml(string_vars_dict)
 
 #Start not save!
+#TODO this is a mess, break it up into deffs
 def save():
     model.update_xml(string_vars_dict)
 
@@ -285,13 +286,34 @@ def save():
     folder = filedialog.askdirectory()
     if folder is None or folder == "":
         return
-    materials = model.output(folder, mirror_var)
+        
+    index = messagebox.askyesno("Generate index files?", 'Do you want to generate index/components.xml and index/macros.xml ?')
+    content = messagebox.askyesno("Generate contet file", 'Do you want to generate content.xml in the selected folder?')
+
+    materials = model.output(folder, mirror_var, index, content)
 
     #Display materials
     mat_string = "\n"
     for material in sorted(set(materials)):
         mat_string = mat_string + material + '\n'
-    messagebox.showwarning("Materials Warning","Make sure you have the following materials defined in libraries/material_library.xml" + mat_string)
+    messagebox.showwarning(
+        "NOTICE!",
+        '''
+        INDEX NOTICE:\n
+        Remeber to add "extensions\\modfolder\\.." to both index\\components.xml and index\\macros.xml.\n\n
+
+        COMPONENT NOTICE:\n
+        Notice that in the component file \n<source geometry="assets\\units\\...\\file_data"/>\nneeds to include the "extensions\\modfolder\\".
+        You have to change this line otherwise the mesh will not load in.\n\n
+        MATERIAL NOTICE:\n
+        The following materials:
+        '''
+        + mat_string
+        + '''
+        \n were detected.
+        Make sure to have these defined in libraries\\material_library.xml
+        '''
+        )
 
 def init(top, gui, *args, **kwargs):
     global w, top_level, root
