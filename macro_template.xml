@@ -20,6 +20,9 @@
       <ship type="" />
     </properties>
     <connections>
+      <connection ref="con_cockpit">
+        <macro ref="" connection="ship" />
+      </connection>
     </connections>
   </macro>
 </macros>

@@ -49,7 +49,6 @@ def to_xml_string(xml):
 	xml_string = xml_string.toprettyxml()
 	return xml_string
 
-
 # class ware_xml()
 class Ware():
 	root = ""
@@ -179,7 +178,7 @@ class ship_component(ship_xml):
 		self.layer = self.layers.find(".//layer")
 		self.waypoints = self.layer.find(".//waypoints")
 		self.lights = self.layer.find(".//lights")
-
+		self.cockpit = self.layer.find(".//connection[@ref='con_cockpit']/macro")
 		self.root = self.components
 
 	#some hidden stuff in here to fill manditory fields
@@ -230,7 +229,9 @@ class ship_component(ship_xml):
 		if not has_position:
 			ET.SubElement(self.connections, "connection", name="position", tags="position", value="1")
 		if not has_space:
-			ET.SubElement(self.connections, "connection", name="space", tags="ship %s" % (ship_class))
+			element = ET.SubElement(self.connections, "connection", name="space", tags="ship %s" % (ship_class))
+			#This seems to be needed for some reason.
+			ET.SubElement(element, "offset")
 
 		ship_class = 'size_%s' % (ship_class.split('_')[-1])
 		path = 'assets\\units\\%s\\%s_data' % (ship_class, ship_name)
@@ -409,6 +410,19 @@ class ship_macro(ship_xml):
 
 	def get_purpose(self):
 		return self.purpose.get('primary')
+
+	def to_xml_string(self):
+		# playercontrol = False
+		cockpit = False
+		for child in connections:
+			# if child.get('name') == 'con_playercontrol':
+			# 	playercontrol = True
+			if child.get('ref') == 'con_cockpit':
+				cockpit = True
+		if not cockpit:
+			element = ET.Element('connection', ref="con_cockpit")
+			ET.SubElement(element, 'macro', ref=self.cockpit_macro, connection='ship')
+
 
 # component = ship_component()
 # macro = ship_macro()

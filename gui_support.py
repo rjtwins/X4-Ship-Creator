@@ -98,9 +98,24 @@ def set_Tk_var():
     global ware_faction_var
     ware_faction_var = StringVar()
 
+    global add_connection_ref_var
+    add_connection_ref_var = StringVar()
+    global add_connection_macro_var
+    add_connection_macro_var = StringVar()
+    global add_connection_macro_connection_var
+    add_connection_macro_connection_var =StringVar()
+
     global ware_comp_list_var
     ware_comp_list_var = StringVar()
     ware_comp_list_var.set([])
+
+    global comp_connections_list_var
+    comp_connections_list_var = StringVar()
+    comp_connections_list_var.set([])
+
+    global marco_connections_list_var
+    marco_connections_list_var = StringVar()
+    marco_connections_list_var.set([])
 
     global model
     model = Main.Main()
@@ -142,8 +157,38 @@ def set_Tk_var():
     "ware_production_time_var" : ware_production_time_var,
     "ware_licence_var" : ware_licence_var,
     "ware_faction_var" : ware_faction_var,
-    "ware_comp_list_var": ware_comp_list_var
+    "ware_comp_list_var": ware_comp_list_var,
+    "comp_connections_list_var" : comp_connections_list_var,
+    "marco_connections_list_var" : marco_connections_list_var,
+    "add_connection_ref_var" : add_connection_ref_var,
+    "add_connection_macro_var" : add_connection_macro_var,
+    "add_connection_macro_connection_var" : add_connection_macro_connection_var
     }
+
+def add_macro_connection():
+    macro = add_connection_macro_var.get()
+    con = add_connection_ref_var.get()
+    #WHY, WHY IS THIS A THING
+    macro_connection = add_connection_macro_connection_var.get()
+    connection = "Macro:%s Ship ref:%s Macro ref:%s" % (macro, con, macro_connection)
+    if macro == "" or macro == None or connection == "" or connection == None:
+        return
+
+    macro_connections = marco_connections_list_var.get()
+    if macro_connections == "" or macro_connections == None:
+        macro_connections = []
+    else:
+        macro_connections = list(eval(macro_connections))
+    macro_connections.append(connection)
+    marco_connections_list_var.set(macro_connections)
+
+def remove_macro_connection():
+    global w
+    active = w.Scrolledlistbox4.curselection()
+    try:
+        w.Scrolledlistbox4.delete(active)
+    except TclError:
+        pass
 
 def mirror():
     pass
@@ -166,7 +211,7 @@ def add_ware():
         messagebox.showerror("Ware Error","That is not a valid ware string.")
 
 def remove_ware():
-    global top_level, w
+    global w
     active = w.Scrolledlistbox1.curselection()
     try:
         w.Scrolledlistbox1.delete(active)
