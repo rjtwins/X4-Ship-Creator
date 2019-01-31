@@ -170,7 +170,7 @@ def add_macro_connection():
     con = add_connection_ref_var.get()
     #WHY, WHY IS THIS A THING
     macro_connection = add_connection_macro_connection_var.get()
-    connection = "Macro:%s Ship ref:%s Macro ref:%s" % (macro, con, macro_connection)
+    connection = "macro:%s    mhip_con:%s    macro_con:%s" % (macro, con, macro_connection)
     if macro == "" or macro == None or connection == "" or connection == None:
         return
 

@@ -18,7 +18,6 @@ def get_dss_path(dae_file):
 	ddss = []
 	for texture in textures:
 		dds = texture[0].text
-		print(dds)
 		ddss.append(dds)
 	return ddss
 
@@ -151,17 +150,21 @@ class ship_xml:
 	def add_connection(self, connection):
 		self.connections.append(connection)
 
+	def get_connections(self):
+		pass
+
 	def get_binary(self):
 		return pickle.dumps(self)
-
-	def fill_from_vars(self, xml):
-		pass
 
 	def get_name(self):
 		pass
 
 	def get_class(self):
 		pass
+
+	def reset_connections(self):
+		for child in self.connections:
+			self.connections.remove(child)
 
 	def to_xml_string(self):
 		return to_xml_string(self.root)
@@ -206,6 +209,14 @@ class ship_component(ship_xml):
 
 	def get_class(self):
 		return self.component.get('class')
+
+	def get_connections(self):
+		connections_list = []
+		for child in self.connections:
+			name = child.get('name')
+			tags = child.get('tags')
+			connections_list.append("Name:%s Tags:%s" % (name, tags))
+		return connections_list
 
 	def to_xml_string(self):
 		#Before we export we want to add some stuff (but only if its not already there)
@@ -293,6 +304,14 @@ class ship_macro(ship_xml):
 	#marks manditory software ?
 	def add_software(self, software):
 		self.software.append(software)
+
+	def add_connection(self, ref, comp_ref, comp_con):
+		connection = ET.Element('connection', ref=ref)
+		macro = ET.Element('macro')
+		component = ET.Element('component', ref=comp_ref, connection=comp_con)
+		macro.append(component)
+		connection.append(macro)
+		super().add_connection(connection)
 
 	def set_explosiondamage(self, value):
 		self.explosiondamage.set('value', value)
@@ -411,17 +430,29 @@ class ship_macro(ship_xml):
 	def get_purpose(self):
 		return self.purpose.get('primary')
 
-	def to_xml_string(self):
-		# playercontrol = False
-		cockpit = False
-		for child in connections:
-			# if child.get('name') == 'con_playercontrol':
-			# 	playercontrol = True
-			if child.get('ref') == 'con_cockpit':
-				cockpit = True
-		if not cockpit:
-			element = ET.Element('connection', ref="con_cockpit")
-			ET.SubElement(element, 'macro', ref=self.cockpit_macro, connection='ship')
+	#The code in here is amost a duplicate of that in gui_support.py look for a way to get rid of this.
+	def get_connections(self):
+		connections_list = []
+		for child in self.connections:
+			con = child.get('ref')
+			macro = child[0].get('ref')
+			macro_connection = child[0].get('connection')
+			connection = "macro:%s    ship_con:%s    macro_con:%s" % (macro, con, macro_connection)
+			connections_list.append(connection)
+		return connections_list
+
+	#Sinse we monitor connections now we don't need this anymore
+	# def to_xml_string(self):
+	# 	# playercontrol = False
+	# 	cockpit = False
+	# 	for child in connections:
+	# 		# if child.get('name') == 'con_playercontrol':
+	# 		# 	playercontrol = True
+	# 		if child.get('ref') == 'con_cockpit':
+	# 			cockpit = True
+	# 	if not cockpit:
+	# 		element = ET.Element('connection', ref="con_cockpit")
+	# 		ET.SubElement(element, 'macro', ref=self.cockpit_macro, connection='ship')
 
 
 # component = ship_component()

@@ -21,11 +21,11 @@ class Main:
 
 	def import_component(self,file):
 		self.component = xml_classes.ship_component(file)
-		self.component.set_name_class(self.macro.get_name, self.macro.get_class)
+		self.component.set_name_class(self.macro.get_name(), self.macro.get_class())
 
 	def import_macro(self,file):
 		self.macro = xml_classes.ship_macro(file)
-		self.component.set_name_class(self.macro.get_name, self.macro.get_class)
+		self.component.set_name_class(self.macro.get_name(), self.macro.get_class())
 
 	def import_x3d(self, file):
 		with open(file, 'r') as f:
@@ -139,6 +139,8 @@ class Main:
 		var_dict["ware_licence_var"].set(self.ware.get_restriction())
 		var_dict["ware_faction_var"].set(self.ware.get_owner())
 		var_dict["ware_comp_list_var"].set(self.ware.get_production_comps())
+		var_dict["comp_connections_list_var"].set(self.component.get_connections())
+		var_dict["marco_connections_list_var"].set(self.macro.get_connections())
 
 	def update_xml(self, var_dict):
 		##Macro
@@ -222,6 +224,16 @@ class Main:
 		if var_dict["ware_comp_list_var"].get() != "":
 			for item in list(eval(var_dict["ware_comp_list_var"].get())):
 				self.ware.add_production_comp(item[0], item[1])
+
+		#Should probably make two lists here, one for display one for storage.
+		self.macro.reset_connections()
+		if var_dict["marco_connections_list_var"].get() != "":
+			for item in list(eval(var_dict["marco_connections_list_var"].get())):
+				item = item.replace('macro:', '').replace('ship_con:', '').replace('macro_con:', '')
+				item = item.split(' ')
+				item = list(filter(None, item))
+				self.macro.add_connection(item[1], item[0], item[2])
+		print(self.macro.to_xml_string())
 
 	def output(self, folder, mirror, index, content):
 		#TODO break this up into defs
